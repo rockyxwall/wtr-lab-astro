@@ -65,7 +65,7 @@ const pctOverlay = (n: number) => ((n / total) * 100 * 0.4).toFixed(4);
                 </div>
                 <div class="flex items-center gap-0.5">
                   {[1, 2, 3, 4, 5].map(s => (
-                    <svg class={`icon inline-flex shrink-0 size-3.5 ${s <= Math.round(r.rating) ? 'text-yellow-500' : 'text-muted-foreground/30'}`}><use href="#star"></use></svg>
+                    <span class={`text-xs ${s <= Math.round(r.rating) ? 'star filled' : 'star'}`}>★</span>
                   ))}
                 </div>
               </div>

@@ -7,17 +7,17 @@ const { recommendations = [] } = Astro.props;
 
 
 <div data-orientation="horizontal" data-activation-direction="right" id="panel-recommendations" role="tabpanel" tabindex="-1" data-index="3" data-slot="tabs-content" class="flex-1 text-sm outline-none" aria-labelledby="tab-recommendations" inert="" data-hidden="" hidden="">
-  <div class="flex items-center justify-between gap-2 mt-4 mb-2 pl-2.5 border-l-2 border-l-primary">
+  <div class="flex items-center justify-between gap-2 mt-0 mb-2 pl-2.5 border-l-2 border-l-primary">
     <span class="flex-1 text-base font-semibold text-card-foreground">Similar Novels</span>
   </div>
 
   {recommendations.length > 0 ? (
     <div class="relative flex h-full items-stretch overflow-hidden">
-      <div class="flex h-full gap-2 overflow-x-auto pb-1.5">
+      <div class="flex h-full gap-2 overflow-x-auto pb-1.5 wtr-scroll">
         {recommendations.map(rec => (
-          <div class="flex shrink-0 flex-col rounded-md bg-card text-sm text-card-foreground shadow border border-border/50 w-44 min-w-44">
-            <a target="_blank" class="block no-underline" href={rec.url || '#'}>
-              <div class="image-wrap relative rounded-md aspect-3/4 w-full rounded-b-none overflow-hidden">
+          <div class="flex shrink-0 flex-col rounded-md bg-card text-sm text-card-foreground shadow border border-wtr-border-muted w-44 min-w-44">
+            <a target="_blank" class="block" href={rec.url || '#'}>
+              <div class="image-wrap relative rounded-md aspect-3/4 w-full rounded-b-none zoom">
                 {rec.cover ? (
                   <img alt={rec.title} loading="lazy" decoding="async" src={rec.cover} class="w-full h-full object-cover" style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                 ) : (
@@ -26,7 +26,7 @@ const { recommendations = [] } = Astro.props;
               </div>
             </a>
             <div class="flex flex-col p-1.5 gap-0.5">
-              <a target="_blank" class="block no-underline" href={rec.url || '#'}>
+              <a target="_blank" class="block" href={rec.url || '#'}>
                 <span class="text-xs font-semibold line-clamp-2 text-card-foreground leading-tight" translate="no">{rec.title}</span>
               </a>
               <div class="flex items-center gap-1">
