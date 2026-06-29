@@ -1,0 +1,63 @@
+---
+export interface Props {
+  averageRating?: number;
+  totalVotes?: number;
+  breakdown?: { 5: number; 4: number; 3: number; 2: number; 1: number };
+  reviews?: Array<{ user: string; rating: number; text: string; date?: string; likes?: number }>;
+}
+const { averageRating = 0, totalVotes = 0, breakdown = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 }, reviews = [] } = Astro.props;
+const total = breakdown[5] + breakdown[4] + breakdown[3] + breakdown[2] + breakdown[1] || 1;
+const pct = (n: number) => ((n / total) * 100).toFixed(1);
+const starColors = ['', '', '', '', 'var(--review-rate-3)', 'var(--review-rate-4)', 'var(--review-rate-5)'];
+---
+
+<div data-orientation="horizontal" data-activation-direction="right" id="panel-reviews" role="tabpanel" tabindex="-1" data-index="2" data-slot="tabs-content" class="flex-1 text-sm outline-none" aria-labelledby="tab-reviews" inert="" data-hidden="" hidden="">
+  <div class="px-2.5">
+    <div class="mb-3">
+      <div class="flex items-center justify-between mb-2">
+        <span class="font-bold"><span>Rating {averageRating.toFixed(1)}/5.0</span></span>
+        <span class="text-foreground text-sm">{totalVotes} votes</span>
+      </div>
+      <div class="flex flex-col">
+        {[5, 4, 3, 2, 1].map(star => {
+          const count = breakdown[star as keyof typeof breakdown] || 0;
+          const percent = pct(count);
+          return (
+            <div class="flex items-center mb-1 group/rating">
+              <span class="mr-2" style="min-width: 12px; font-size: 0.875rem;">{star}</span>
+              <div class="grow mr-2">
+                <div class="h-3.5 w-full overflow-hidden rounded-full bg-accent/50 flex">
+                  <div class="h-full" style={`width: ${percent}%; background-color: var(--review-rate-${star});`}></div>
+                </div>
+              </div>
+              <span class="text-muted-foreground text-xs" style="min-width: 65px; text-align: right;">{percent}% ({count})</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
+    {reviews.length > 0 ? (
+      <div class="flex flex-col gap-3">
+        {reviews.map(r => (
+          <div class="border border-border rounded-lg p-3">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-medium text-sm text-card-foreground">{r.user}</span>
+              <div class="flex items-center gap-1">
+                <span class="text-xs font-bold" style={`color: var(--review-rate-${Math.round(r.rating)});`}>{r.rating}</span>
+                <span class="text-xs text-muted-foreground">/ 5</span>
+              </div>
+            </div>
+            {r.text && <p class="text-sm text-foreground leading-relaxed">{r.text}</p>}
+            <div class="flex items-center gap-2 mt-2 text-xs text-muted-foreground">
+              {r.date && <span>{r.date}</span>}
+              {r.likes !== undefined && <span>{r.likes} likes</span>}
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="py-8 text-center text-muted-foreground">No reviews yet.</div>
+    )}
+  </div>
+</div>

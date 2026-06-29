@@ -1,0 +1,140 @@
+---
+import SvgSprite from '../components/SvgSprite.astro';
+import SvgDefs from '../components/SvgDefs.astro';
+import Nav from '../components/Nav.astro';
+import NovelHeader from '../components/NovelHeader.astro';
+import TabAbout from '../components/TabAbout.astro';
+import TabToc from '../components/TabToc.astro';
+import TabReviews from '../components/TabReviews.astro';
+import TabRecommendations from '../components/TabRecommendations.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  frontmatter: {
+    title: string;
+    chineseTitle?: string;
+    cover?: string;
+    author?: string;
+    status?: string;
+    views?: string;
+    chapters?: number;
+    rating?: number;
+    readers?: number;
+    totalChars?: string;
+    tags?: string[];
+    genres?: string[];
+    details?: {
+      author?: string;
+      status?: string;
+      dateAdded?: string;
+      year?: number;
+      origin?: string;
+      language?: string;
+    };
+    rankings?: {
+      weekly?: number;
+      allTime?: number;
+    };
+  };
+  patrons?: Array<{ name: string; amount: number; rank?: number }>;
+  chaptersList?: Array<{ num: number; title: string; date?: string; url?: string }>;
+  reviewsData?: {
+    averageRating?: number;
+    totalVotes?: number;
+    breakdown?: { 5: number; 4: number; 3: number; 2: number; 1: number };
+    reviews?: Array<{ user: string; rating: number; text: string; date?: string; likes?: number }>;
+  };
+  recommendationsList?: Array<{ title: string; cover?: string; rating?: number; url?: string }>;
+}
+
+const { frontmatter: data, patrons, chaptersList, reviewsData, recommendationsList } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark" data-color-scheme="dark" style="color-scheme: dark;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>{data.title} - WTR-LAB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="anonymous">
+  <link rel="stylesheet" href="/assets/css/style-01.css">
+  <link rel="stylesheet" href="/assets/css/style-02.css">
+  <link rel="stylesheet" href="/assets/css/style-03.css">
+  <link rel="stylesheet" href="/assets/css/style-04.css">
+  <link rel="stylesheet" href="/assets/css/style-05.css">
+  <link rel="stylesheet" href="/assets/css/body-style-06.css">
+  <link rel="stylesheet" href="/assets/css/body-style-07.css">
+  <script is:inline src="/assets/js/body-01.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body class="wtr-adblock-off">
+  <SvgSprite />
+  <SvgDefs />
+  <Nav siteTitle="WTR-LAB" />
+
+  <div id="__next">
+    <NovelHeader
+      title={data.title}
+      chineseTitle={data.chineseTitle}
+      cover={data.cover}
+      author={data.author}
+      status={data.status}
+      views={data.views}
+      chapters={data.chapters}
+      rating={data.rating}
+      readers={data.readers}
+      totalChars={data.totalChars}
+      tags={data.tags}
+      genres={data.genres}
+    />
+
+    <!-- Tabs -->
+    <div class="layout-body flex flex-col max-w-7xl container mx-auto font-sans antialiased">
+      <div data-slot="card" data-size="default" data-variant="default" class="group/card flex flex-col gap-0 bg-card text-sm text-card-foreground has-[>img:first-child]:pt-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl shadow rounded-md ring-1 ring-foreground/20 fix-size fix-edge mb-2 overflow-hidden">
+        <div data-slot="card-content" class="p-2">
+          <div data-orientation="horizontal" data-activation-direction="left" data-slot="tabs" class="group/tabs flex gap-2 data-horizontal:flex-col new-pills">
+            <!-- Tab List -->
+            <div data-orientation="horizontal" data-activation-direction="left" role="tablist" data-slot="tabs-list" data-variant="wrap" class="group/tabs-list items-center justify-center rounded-lg text-muted-foreground group-data-vertical/tabs:h-fit group-data-vertical/tabs:flex-col data-[variant=line]:rounded-none bg-border h-auto group-data-horizontal/tabs:h-auto grid w-full grid-cols-2 sm:grid-cols-4 gap-1 p-1">
+              <button type="button" data-orientation="horizontal" aria-disabled="false" tabindex="0" role="tab" aria-selected="true" id="tab-about" data-slot="tabs-trigger" class="relative inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50 has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 aria-disabled:pointer-events-none aria-disabled:opacity-50 dark:text-muted-foreground dark:hover:text-foreground group-data-[variant=default]/tabs-list:data-active:shadow-sm group-data-[variant=line]/tabs-list:data-active:shadow-none [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent dark:group-data-[variant=line]/tabs-list:data-active:border-transparent dark:group-data-[variant=line]/tabs-list:data-active:bg-transparent data-active:bg-background data-active:text-foreground dark:data-active:border-input dark:data-active:bg-input/30 dark:data-active:text-foreground after:absolute after:inset-x-0 after:bottom-0 after:hidden group-data-[variant=line]/tabs-list:after:block group-data-[variant=line]/tabs-list:data-active:after:bg-primary h-8 text-xs">
+                About
+              </button>
+              <button type="button" data-orientation="horizontal" aria-disabled="false" tabindex="-1" role="tab" aria-selected="false" id="tab-toc" data-slot="tabs-trigger" class="relative inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50 has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 aria-disabled:pointer-events-none aria-disabled:opacity-50 dark:text-muted-foreground dark:hover:text-foreground group-data-[variant=default]/tabs-list:data-active:shadow-sm group-data-[variant=line]/tabs-list:data-active:shadow-none [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent dark:group-data-[variant=line]/tabs-list:data-active:border-transparent dark:group-data-[variant=line]/tabs-list:data-active:bg-transparent data-active:bg-background data-active:text-foreground dark:data-active:border-input dark:data-active:bg-input/30 dark:data-active:text-foreground after:absolute after:inset-x-0 after:bottom-0 after:hidden group-data-[variant=line]/tabs-list:after:block group-data-[variant=line]/tabs-list:data-active:after:bg-primary h-8 text-xs">
+                Table of Contents
+              </button>
+              <button type="button" data-orientation="horizontal" aria-disabled="false" tabindex="-1" role="tab" aria-selected="false" id="tab-reviews" data-slot="tabs-trigger" class="relative inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50 has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 aria-disabled:pointer-events-none aria-disabled:opacity-50 dark:text-muted-foreground dark:hover:text-foreground group-data-[variant=default]/tabs-list:data-active:shadow-sm group-data-[variant=line]/tabs-list:data-active:shadow-none [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent dark:group-data-[variant=line]/tabs-list:data-active:border-transparent dark:group-data-[variant=line]/tabs-list:data-active:bg-transparent data-active:bg-background data-active:text-foreground dark:data-active:border-input dark:data-active:bg-input/30 dark:data-active:text-foreground after:absolute after:inset-x-0 after:bottom-0 after:hidden group-data-[variant=line]/tabs-list:after:block group-data-[variant=line]/tabs-list:data-active:after:bg-primary h-8 text-xs">
+                Reviews
+              </button>
+              <button type="button" data-orientation="horizontal" aria-disabled="false" tabindex="-1" role="tab" aria-selected="false" id="tab-recommendations" data-slot="tabs-trigger" class="relative inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50 has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 aria-disabled:pointer-events-none aria-disabled:opacity-50 dark:text-muted-foreground dark:hover:text-foreground group-data-[variant=default]/tabs-list:data-active:shadow-sm group-data-[variant=line]/tabs-list:data-active:shadow-none [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent dark:group-data-[variant=line]/tabs-list:data-active:border-transparent dark:group-data-[variant=line]/tabs-list:data-active:bg-transparent data-active:bg-background data-active:text-foreground dark:data-active:border-input dark:data-active:bg-input/30 dark:data-active:text-foreground after:absolute after:inset-x-0 after:bottom-0 after:hidden group-data-[variant=line]/tabs-list:after:block group-data-[variant=line]/tabs-list:data-active:after:bg-primary h-8 text-xs">
+                Recommendations
+              </button>
+            </div>
+
+            <!-- Tab Panels -->
+            <TabAbout details={data.details} rankings={data.rankings} genres={data.genres} tags={data.tags} patrons={patrons}>
+              <slot name="content" />
+            </TabAbout>
+
+            <TabToc chapters={chaptersList} totalChapters={data.chapters} />
+
+            <TabReviews
+              averageRating={reviewsData?.averageRating}
+              totalVotes={reviewsData?.totalVotes}
+              breakdown={reviewsData?.breakdown}
+              reviews={reviewsData?.reviews}
+            />
+
+            <TabRecommendations recommendations={recommendationsList} />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <Footer />
+  </div>
+
+  <script is:inline src="/assets/js/body-02.js"></script>
+</body>
+</html>

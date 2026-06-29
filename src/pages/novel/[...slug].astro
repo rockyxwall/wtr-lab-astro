@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+import type { InferEntrySchema } from 'astro:content';
+
+interface DataFile {
+  default: unknown;
+}
+
+interface Patron {
+  name: string;
+  amount: number;
+  rank?: number;
+}
+
+interface Chapter {
+  num: number;
+  title: string;
+  date?: string;
+  url?: string;
+}
+
+interface ReviewsData {
+  averageRating?: number;
+  totalVotes?: number;
+  breakdown?: { 5: number; 4: number; 3: number; 2: number; 1: number };
+  reviews?: Array<{ user: string; rating: number; text: string; date?: string; likes?: number }>;
+}
+
+interface Recommendation {
+  title: string;
+  cover?: string;
+  rating?: number;
+  url?: string;
+}
+
+const dataModules = import.meta.glob('../../data/**/*.json', { eager: true });
+
+function getData<T>(slug: string, category: string): T | undefined {
+  for (const [path, mod] of Object.entries(dataModules)) {
+    if (path.includes(`/data/${category}/${slug}.json`)) {
+      return (mod as DataFile).default as T;
+    }
+  }
+  return undefined;
+}
+
+export async function getStaticPaths() {
+  const novels = await getCollection('novel');
+  return novels.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const data = entry.data as InferEntrySchema<'novel'>;
+const slug = entry.slug;
+
+const patrons = getData<Patron[]>(slug, 'patrons');
+const chaptersList = getData<Chapter[]>(slug, 'chapters');
+const reviewsData = getData<ReviewsData>(slug, 'reviews');
+const recommendationsList = getData<Recommendation[]>(slug, 'recommendations');
+---
+
+<PostLayout
+  frontmatter={data}
+  patrons={patrons}
+  chaptersList={chaptersList}
+  reviewsData={reviewsData}
+  recommendationsList={recommendationsList}
+>
+  <Fragment slot="content">
+    <Content />
+  </Fragment>
+</PostLayout>

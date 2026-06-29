@@ -1,0 +1,101 @@
+---
+export interface Props {
+  details?: {
+    author?: string;
+    status?: string;
+    dateAdded?: string;
+    year?: number;
+    origin?: string;
+    language?: string;
+  };
+  rankings?: {
+    weekly?: number;
+    allTime?: number;
+  };
+  genres?: string[];
+  tags?: string[];
+  patrons?: Array<{ name: string; amount: number; rank?: number }>;
+}
+const { details, rankings, genres, tags, patrons } = Astro.props;
+---
+
+<div data-orientation="horizontal" data-activation-direction="left" aria-labelledby="tab-about" id="panel-about" role="tabpanel" tabindex="0" data-index="0" data-slot="tabs-content" class="flex-1 text-sm outline-none">
+  <!-- Novel Summary -->
+  <div class="flex items-center justify-between gap-2 mt-4 mb-2 pl-2.5 border-l-2 border-l-primary">
+    <span class="flex-1 text-base font-semibold text-card-foreground">Novel Summary</span>
+  </div>
+  <div class="desc-wrap text-foreground px-2.5">
+    <slot />
+  </div>
+
+  <!-- Details -->
+  {details && (
+    <>
+      <div class="flex items-center justify-between gap-2 mt-4 mb-2 pl-2.5 border-l-2 border-l-primary">
+        <span class="flex-1 text-base font-semibold text-card-foreground">Details</span>
+      </div>
+      <div class="px-2.5">
+        <div class="grid grid-cols-2 gap-2 text-sm">
+          {details.author && <div class="flex gap-1"><span class="text-muted-foreground">Author:</span><span class="text-card-foreground">{details.author}</span></div>}
+          {details.status && <div class="flex gap-1"><span class="text-muted-foreground">Status:</span><span class="text-card-foreground">{details.status}</span></div>}
+          {details.dateAdded && <div class="flex gap-1"><span class="text-muted-foreground">Date Added:</span><span class="text-card-foreground">{details.dateAdded}</span></div>}
+          {details.year && <div class="flex gap-1"><span class="text-muted-foreground">Year:</span><span class="text-card-foreground">{details.year}</span></div>}
+          {details.origin && <div class="flex gap-1"><span class="text-muted-foreground">Origin:</span><span class="text-card-foreground">{details.origin}</span></div>}
+          {details.language && <div class="flex gap-1"><span class="text-muted-foreground">Language:</span><span class="text-card-foreground">{details.language}</span></div>}
+        </div>
+      </div>
+    </>
+  )}
+
+  <!-- Rankings -->
+  {rankings && (
+    <>
+      <div class="flex items-center justify-between gap-2 mt-4 mb-2 pl-2.5 border-l-2 border-l-primary">
+        <span class="flex-1 text-base font-semibold text-card-foreground">Rankings</span>
+      </div>
+      <div class="px-2.5">
+        <div class="grid grid-cols-2 gap-2 text-sm">
+          {rankings.weekly !== undefined && <div class="flex gap-1"><span class="text-muted-foreground">Weekly:</span><span class="font-medium text-card-foreground">#{rankings.weekly}</span></div>}
+          {rankings.allTime !== undefined && <div class="flex gap-1"><span class="text-muted-foreground">All Time:</span><span class="font-medium text-card-foreground">#{rankings.allTime}</span></div>}
+        </div>
+      </div>
+    </>
+  )}
+
+  <!-- Genre & Tags -->
+  {(genres && genres.length > 0) || (tags && tags.length > 0) ? (
+    <>
+      <div class="flex items-center justify-between gap-2 mt-4 mb-2 pl-2.5 border-l-2 border-l-primary">
+        <span class="flex-1 text-base font-semibold text-card-foreground">Genre & Tags</span>
+      </div>
+      <div class="px-2.5 flex flex-wrap gap-1.5">
+        {genres?.map(g => <span class="inline-flex items-center rounded-full bg-primary/10 text-primary px-2.5 py-0.5 text-xs font-medium">{g}</span>)}
+        {tags?.map(t => <span class="inline-flex items-center rounded-full bg-secondary/20 text-secondary px-2.5 py-0.5 text-xs font-medium">{t}</span>)}
+      </div>
+    </>
+  ) : null}
+
+  <!-- Novel Patrons -->
+  {patrons && patrons.length > 0 && (
+    <>
+      <div class="flex items-center justify-between gap-2 mt-4 mb-2 pl-2.5 border-l-2 border-l-primary">
+        <svg class="icon inline-flex size-[18px] text-ticket-gold shrink-0"><use href="#crown"></use></svg>
+        <span class="flex-1 text-base font-semibold text-card-foreground">Novel Patrons</span>
+      </div>
+      <div class="px-2.5">
+        <div class="npc-rows border border-border rounded-lg overflow-hidden">
+          {patrons.map((p, i) => (
+            <div class="npc-row flex items-center gap-2 px-3 py-2 border-b border-border last:border-b-0" class:list={{ 'npc-gold': i === 0, 'npc-silver': i === 1, 'npc-bronze': i === 2 }}>
+              <span class="npc-rank font-bold text-sm w-6 text-center" class:list={{ 'text-yellow-500': i === 0, 'text-gray-400': i === 1, 'text-amber-700': i === 2, 'text-muted-foreground': i > 2 }}>{i + 1}</span>
+              <span class="flex-1 text-sm text-card-foreground">{p.name}</span>
+              <span class="npc-ticket-pill inline-flex items-center gap-1 text-xs font-medium" translate="no">
+                <svg class="icon inline-flex shrink-0 size-4 npc-icon"><use href="#ticket" class:list={{ 'svg-ticket': i === 0, 'svg-silver': i === 1 }}></use></svg>
+                <span class="npc-amount">{p.amount}</span>
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  )}
+</div>

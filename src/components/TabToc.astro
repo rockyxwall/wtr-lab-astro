@@ -1,0 +1,30 @@
+---
+export interface Props {
+  chapters?: Array<{ num: number; title: string; date?: string; url?: string }>;
+  totalChapters?: number;
+}
+const { chapters = [], totalChapters } = Astro.props;
+---
+
+<div data-orientation="horizontal" data-activation-direction="right" id="panel-toc" role="tabpanel" tabindex="-1" data-index="1" data-slot="tabs-content" class="flex-1 text-sm outline-none" aria-labelledby="tab-toc" inert="" data-hidden="" hidden="">
+  <div class="px-2.5">
+    <div class="flex items-center justify-between gap-2 mt-4 mb-2 pl-2.5 border-l-2 border-l-primary">
+      <span class="flex-1 text-base font-semibold text-card-foreground">Table of Contents</span>
+      {totalChapters && <span class="text-xs text-muted-foreground">{totalChapters} chapters</span>}
+    </div>
+
+    {chapters.length > 0 ? (
+      <div class="flex flex-col">
+        {chapters.map(ch => (
+          <a href={ch.url || '#'} class="flex items-center gap-3 px-2 py-1.5 border-b border-border last:border-b-0 hover:bg-accent/30 rounded-sm transition-colors no-underline">
+            <span class="text-xs font-mono text-muted-foreground w-8 shrink-0 text-right">{ch.num}</span>
+            <span class="flex-1 text-sm text-card-foreground truncate">{ch.title}</span>
+            {ch.date && <span class="text-xs text-muted-foreground shrink-0">{ch.date}</span>}
+          </a>
+        ))}
+      </div>
+    ) : (
+      <div class="py-8 text-center text-muted-foreground">No chapters available yet.</div>
+    )}
+  </div>
+</div>

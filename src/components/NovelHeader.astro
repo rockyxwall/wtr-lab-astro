@@ -1,0 +1,105 @@
+---
+export interface Props {
+  title: string;
+  chineseTitle?: string;
+  cover?: string;
+  author?: string;
+  status?: string;
+  views?: string;
+  chapters?: number;
+  rating?: number;
+  readers?: number;
+  totalChars?: string;
+  tags?: string[];
+  genres?: string[];
+}
+const { title, chineseTitle, cover, author, status, views, chapters, rating, readers, totalChars, tags, genres } = Astro.props;
+const coverImage = cover || 'https://via.placeholder.com/160x224?text=No+Cover';
+---
+
+<div class="layout-body flex flex-col max-w-7xl container mx-auto font-sans antialiased">
+  <div>
+    <div data-slot="card" data-size="default" data-variant="default" class="group/card flex flex-col gap-0 bg-card text-sm text-card-foreground has-[>img:first-child]:pt-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl shadow rounded-md ring-1 ring-foreground/20 fix-size fix-edge mb-2 overflow-hidden">
+      <div data-slot="card-content" class="p-2">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <div class="flex-1 min-w-0">
+            <h1 class="text-base text-card-foreground sm:text-xl font-bold uppercase tracking-wide leading-tight wrap-break-word">{title}</h1>
+            {chineseTitle && <p class="text-xs sm:text-sm text-foreground mt-0.5 wrap-break-word">{chineseTitle}</p>}
+          </div>
+          <div class="shrink-0 flex items-center gap-1">
+            <button type="button" tabindex="0" data-slot="button" class="group/button inline-flex cursor-pointer items-center justify-center bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 border bg-card hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50 size-8 h-9 w-9 shrink-0 p-0 border-amber-200 text-amber-600 hover:bg-amber-50 rounded-lg self-start">
+              <svg class="icon inline-flex shrink-0 size-4"><use href="#alert-outline"></use></svg>
+            </button>
+          </div>
+        </div>
+        <div class="flex w-full rounded-lg border bg-card/50 overflow-hidden mb-3">
+          <div class="shrink-0">
+            <div class="image-wrap relative rounded-md h-full w-30 sm:w-40 rounded-lg overflow-hidden" style="aspect-ratio: 5/7;">
+              <img class="object-cover w-full h-full align-middle" style="view-transition-name: var(--view-transition-name, novel-cover);" src={coverImage} alt={title} loading="lazy" decoding="async">
+            </div>
+          </div>
+          <div class="flex-1 flex flex-col gap-2 p-2 sm:p-3 min-w-0">
+            <div class="grid grid-cols-2 gap-x-2 gap-y-1">
+              {author && (
+                <div class="flex items-center gap-1 text-xs text-foreground">
+                  <span class="text-muted-foreground">Author:</span>
+                  <span class="font-medium text-card-foreground">{author}</span>
+                </div>
+              )}
+              {status && (
+                <div class="flex items-center gap-1 text-xs text-foreground">
+                  <span class="text-muted-foreground">Status:</span>
+                  <span class="font-medium" class:list={{ 'text-green-500': status === 'Ongoing', 'text-blue-500': status === 'Completed', 'text-yellow-500': status === 'Hiatus' }}>{status}</span>
+                </div>
+              )}
+              {views && (
+                <div class="flex items-center gap-1 text-xs text-foreground">
+                  <span class="text-muted-foreground">Views:</span>
+                  <span class="font-medium text-card-foreground">{views}</span>
+                </div>
+              )}
+              {chapters !== undefined && (
+                <div class="flex items-center gap-1 text-xs text-foreground">
+                  <span class="text-muted-foreground">Chapters:</span>
+                  <span class="font-medium text-card-foreground">{chapters}</span>
+                </div>
+              )}
+              {rating !== undefined && (
+                <div class="flex items-center gap-1 text-xs text-foreground">
+                  <span class="text-muted-foreground">Rating:</span>
+                  <span class="font-medium text-card-foreground">{rating.toFixed(1)}</span>
+                </div>
+              )}
+              {readers !== undefined && (
+                <div class="flex items-center gap-1 text-xs text-foreground">
+                  <span class="text-muted-foreground">Readers:</span>
+                  <span class="font-medium text-card-foreground">{readers.toLocaleString()}</span>
+                </div>
+              )}
+              {totalChars && (
+                <div class="flex items-center gap-1 text-xs text-foreground">
+                  <span class="text-muted-foreground">Chars:</span>
+                  <span class="font-medium text-card-foreground">{totalChars}</span>
+                </div>
+              )}
+            </div>
+            <div class="flex flex-wrap gap-1 mt-1">
+              {genres?.map(genre => (
+                <span class="inline-flex items-center rounded-full bg-primary/10 text-primary px-2 py-0.5 text-xs font-medium">{genre}</span>
+              ))}
+              {tags?.map(tag => (
+                <span class="inline-flex items-center rounded-full bg-secondary/20 text-secondary px-2 py-0.5 text-xs font-medium">{tag}</span>
+              ))}
+            </div>
+            <div class="flex items-center gap-2 mt-auto pt-1">
+              <button type="button" class="group/button inline-flex cursor-pointer items-center justify-center rounded-lg bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none disabled:pointer-events-none disabled:opacity-50 border border-primary bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm px-4 py-1.5 h-9 gap-1">
+                <svg class="icon inline-flex shrink-0 size-4"><use href="#play"></use></svg>
+                Continue Reading
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

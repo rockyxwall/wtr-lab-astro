@@ -1,0 +1,42 @@
+---
+export interface Props {
+  siteTitle?: string;
+}
+const { siteTitle = 'WTR-LAB' } = Astro.props;
+---
+<nav class="sticky inset-x-0 top-0 z-40 border-b border-white/10 bg-navbar py-2 text-white shadow-md transition-transform duration-200 [body.hide-navbar:not(.popover-open)_&amp;]:-translate-y-14 font-sans antialiased" style="margin-bottom: 8px" translate="no">
+  <div class="mx-auto flex w-full max-w-7xl items-center px-2">
+    <button type="button" tabindex="0" data-slot="button" class="group/button inline-flex cursor-pointer shrink-0 items-center justify-center rounded-lg bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 border aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50 size-10 border-white/30 bg-transparent text-white/85 hover:bg-white/10 hover:text-white focus-visible:border-white/50 focus-visible:bg-white/10 focus-visible:text-white lg:w-10 mr-1 ml-0">
+      <svg class="icon inline-flex shrink-0 size-6"><use href="#menu"></use></svg>
+    </button>
+    <div data-closed="" data-swipe-direction="right" role="presentation" aria-hidden="true" id="base-ui-_r_2_" data-slot="drawer-swipe-area" class="data-[swipe-direction=left]:inset-y-0 data-[swipe-direction=left]:right-0 data-[swipe-direction=left]:w-10 data-[swipe-direction=right]:inset-y-0 data-[swipe-direction=right]:left-0 data-[swipe-direction=right]:w-10 data-[swipe-direction=up]:inset-x-0 data-[swipe-direction=up]:bottom-0 data-[swipe-direction=up]:h-10 data-[swipe-direction=down]:inset-x-0 data-[swipe-direction=down]:top-0 data-[swipe-direction=down]:h-10 fixed inset-y-0 left-0 z-50 w-4!" style="touch-action: pan-y;"></div>
+    <a class="me-4 inline-flex items-center gap-2 whitespace-nowrap text-[18px] font-bold leading-6 tracking-wider no-underline" draggable="false" href="/">
+      <svg class="icon inline-flex size-7 shrink-0" viewBox="0 0 512 512">
+        <path fill="currentColor" d="M502 197.3 273 11.3c-10-8-24-8-34 0L10 197.3c-8 6.4-13 16.4-13 27v248.4C-3 499.7 9.3 512 24.7 512H184V344c0-39.7 32.3-72 72-72s72 32.3 72 72v168h159.3c15.3 0 27.7-12.3 27.7-27.7V224.3c0-10.6-5-20.6-13-27z"/>
+      </svg>
+      <span class="hidden sm:inline">{siteTitle}</span>
+    </a>
+    <span class="flex-1"></span>
+    <div class="absolute inset-y-0 left-0 right-0 z-50 items-center bg-navbar lg:static lg:z-auto lg:bg-transparent hidden lg:flex">
+      <button type="button" tabindex="0" data-slot="button" class="group/button inline-flex cursor-pointer shrink-0 items-center justify-center rounded-lg bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 border border-border bg-card hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50 size-10 lg:hidden ml-2 border-white/30! bg-transparent! text-white/85! hover:bg-white/10! hover:text-white! focus:bg-white/10! focus:text-white! lg:w-10">
+        <svg class="icon inline-flex shrink-0 size-6 rotate-180"><use href="#arrow_forward"></use></svg>
+      </button>
+      <div class="relative flex-1 px-2 lg:px-0 lg:w-64">
+        <form><input id="search-input" type="search" data-slot="input" placeholder="Search..." aria-label="Search" class="w-full min-w-0 rounded-lg border px-2.5 py-1 text-base transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 pl-8 lg:pl-8 h-9 bg-input/20 border-white/20 text-white placeholder:text-white/50 focus-visible:ring-white/30"></form>
+        <svg class="icon inline-flex shrink-0 size-4 absolute left-4 lg:left-4 top-1/2 -translate-y-1/2 text-white/50 pointer-events-none"><use href="#search"></use></svg>
+      </div>
+      <div class="w-px h-6 bg-white/15 mx-1 lg:hidden"></div>
+      <div class="flex items-center gap-x-1">
+        <a class="inline-flex items-center whitespace-nowrap rounded-md px-2 py-1 text-xs text-white/85 no-underline transition-colors hover:bg-white/10 hover:text-white lg:text-sm" href="/library">Library</a>
+        <a class="inline-flex items-center whitespace-nowrap rounded-md px-2 py-1 text-xs text-white/85 no-underline transition-colors hover:bg-white/10 hover:text-white lg:text-sm" href="/novels">Novels</a>
+        <a class="inline-flex items-center whitespace-nowrap rounded-md px-2 py-1 text-xs text-white/85 no-underline transition-colors hover:bg-white/10 hover:text-white lg:text-sm" href="/ranking">Ranking</a>
+        <a class="inline-flex items-center whitespace-nowrap rounded-md px-2 py-1 text-xs text-white/85 no-underline transition-colors hover:bg-white/10 hover:text-white lg:text-sm" href="/leaderboard">Leaderboard</a>
+      </div>
+    </div>
+    <div class="flex items-center gap-x-1 lg:hidden">
+      <button type="button" tabindex="0" data-slot="button" class="group/button inline-flex cursor-pointer shrink-0 items-center justify-center rounded-lg bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 border aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50 size-10 border-white/30 bg-transparent text-white/85 hover:bg-white/10 hover:text-white focus-visible:border-white/50 focus-visible:bg-white/10 focus-visible:text-white lg:w-10">
+        <svg class="icon inline-flex shrink-0 size-6"><use href="#search"></use></svg>
+      </button>
+    </div>
+  </div>
+</nav>
