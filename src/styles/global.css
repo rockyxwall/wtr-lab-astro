@@ -120,3 +120,28 @@ html {
 .chapter-bg {
   background-color: #1b1d23 !important;
 }
+
+.desc-wrap {
+  font-size: 14px;
+}
+
+.desc-wrap .swap {
+  cursor: pointer;
+  z-index: 2;
+  font-weight: 600;
+  text-decoration: underline;
+  position: relative;
+}
+
+.desc-wrap .description p {
+  margin-bottom: 4px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.description {
+  max-height: 10.5em;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}

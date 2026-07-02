@@ -127,7 +127,7 @@ Su Yuan was reborn into the world of cultivating immortals and found that cultiv
 
 Fortunately, I activated the system and obtained entries with amazing effects!
 
-**【Combining work and rest】**: You are very good at combining work and rest. The longer the rest time, the better the practice effect.
+【Combining work and rest】: You are very good at combining work and rest. The longer the rest time, the better the practice effect.
 
 While others were practicing hard, Su Yuan was slacking off and barbecuing.
 

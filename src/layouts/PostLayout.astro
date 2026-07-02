@@ -98,6 +98,7 @@ const {
         totalChars={frontmatter.totalChars}
         tags={frontmatter.tags}
         genres={frontmatter.genres}
+        ratingVotes={reviewsData?.totalVotes}
       />
 
       <UnlockProgress />
@@ -106,16 +107,16 @@ const {
         <div class="p-2 chapter-details">
           <div data-horizontal class="group/tabs flex gap-2 data-horizontal:flex-col new-pills">
             <div role="tablist" class="group/tabs-list items-center justify-center rounded-lg text-muted-foreground bg-border h-auto grid w-full grid-cols-2 sm:grid-cols-4 gap-1 p-1">
-              <button role="tab" aria-selected="true" data-active class="inline-flex items-center justify-center rounded-md px-3 py-2 text-xs font-medium whitespace-nowrap transition-all outline-none bg-background text-foreground shadow-sm">
+              <button role="tab" aria-selected="true" data-active class="inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 text-sm font-medium whitespace-nowrap transition-all outline-none py-2 h-10 bg-background shadow-sm text-foreground">
                 About
               </button>
-              <button role="tab" aria-selected="false" class="inline-flex items-center justify-center rounded-md px-3 py-2 text-xs font-medium whitespace-nowrap transition-all outline-none text-muted-foreground hover:text-foreground">
+              <button role="tab" aria-selected="false" class="inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 text-sm font-medium whitespace-nowrap transition-all outline-none py-2 h-10 text-muted-foreground hover:text-foreground">
                 Table of Contents
               </button>
-              <button role="tab" aria-selected="false" class="inline-flex items-center justify-center rounded-md px-3 py-2 text-xs font-medium whitespace-nowrap transition-all outline-none text-muted-foreground hover:text-foreground">
+              <button role="tab" aria-selected="false" class="inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 text-sm font-medium whitespace-nowrap transition-all outline-none py-2 h-10 text-muted-foreground hover:text-foreground">
                 Reviews
               </button>
-              <button role="tab" aria-selected="false" class="inline-flex items-center justify-center rounded-md px-3 py-2 text-xs font-medium whitespace-nowrap transition-all outline-none text-muted-foreground hover:text-foreground">
+              <button role="tab" aria-selected="false" class="inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 text-sm font-medium whitespace-nowrap transition-all outline-none py-2 h-10 text-muted-foreground hover:text-foreground">
                 Recommendations
               </button>
             </div>
@@ -128,6 +129,8 @@ const {
               tags={frontmatter.tags}
               genres={frontmatter.genres}
               tagCategories={frontmatter.tagCategories}
+              title={frontmatter.title}
+              chineseTitle={frontmatter.chineseTitle}
             >
               <Fragment slot="content">
                 <slot name="content" />
