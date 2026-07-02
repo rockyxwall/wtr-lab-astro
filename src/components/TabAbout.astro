@@ -18,6 +18,9 @@ interface Props {
   patrons?: Patron[];
   otherNovels?: OtherNovel[];
   slug?: string;
+  tags?: string[];
+  genres?: string[];
+  tagCategories?: Record<string, string[]>;
 }
 
 const {
@@ -26,6 +29,9 @@ const {
   patrons = [],
   otherNovels = [],
   slug = "",
+  tags = [],
+  genres = [],
+  tagCategories = {},
 } = Astro.props;
 ---
 
@@ -41,21 +47,53 @@ const {
     </div>
   </section>
 
+  {(genres.length > 0 || Object.keys(tagCategories).length > 0) && (
+    <section aria-labelledby="genre-tags-heading">
+      <h2 id="genre-tags-heading" class="flex items-center gap-2 mt-4 mb-2 pl-2.5 border-l-2 border-l-primary text-base font-semibold text-card-foreground">
+        Genre &amp; Tags
+      </h2>
+      <div class="rounded-lg border border-border overflow-hidden mb-4">
+        {genres.length > 0 && (
+          <div class="flex flex-wrap items-center gap-1.5 px-3.5 py-[9px] border-b border-border even:bg-black/[0.016] dark:even:bg-white/[0.022]">
+            <div class="flex items-center w-full gap-1.5 text-[10px] uppercase tracking-wider font-bold text-muted-foreground">
+              <span>Genre</span>
+              <span class="text-[9px] font-normal text-muted-foreground/60">{genres.length}</span>
+            </div>
+            {genres.map((g, i) => (
+              <span class="inline-flex items-center capitalize text-xs font-medium border rounded px-1.5 py-0.5 whitespace-nowrap transition-colors border-border/70 text-card-foreground">{g}</span>
+            ))}
+          </div>
+        )}
+        {Object.entries(tagCategories).map(([category, items], i) => (
+          <div class="flex flex-wrap items-center gap-1.5 px-3.5 py-[9px] border-b border-border last:border-b-0 even:bg-black/[0.016] dark:even:bg-white/[0.022]">
+            <div class="flex items-center w-full gap-1.5 text-[10px] uppercase tracking-wider font-bold text-muted-foreground">
+              <span>{category}</span>
+              <span class="text-[9px] font-normal text-muted-foreground/60">{items.length}</span>
+            </div>
+            {items.map((item: string) => (
+              <span class="inline-flex items-center capitalize text-xs font-medium border rounded px-1.5 py-0.5 whitespace-nowrap transition-colors border-border/70 text-card-foreground hover:bg-muted/50 hover:text-card-foreground hover:border-primary/50">{item}</span>
+            ))}
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
   {otherNovels.length > 0 && (
     <section aria-labelledby="other-novels-heading">
       <h2 id="other-novels-heading" class="flex items-center gap-2 mt-4 mb-2 pl-2.5 border-l-2 border-l-primary text-base font-semibold text-card-foreground">
         Author's Other Novels
       </h2>
-      <ol class="list-none border border-border rounded-lg overflow-hidden mb-4">
+      <ul class="list-none p-0 m-0 border border-border rounded-lg overflow-hidden mb-4">
         {otherNovels.map((novel, i) => (
           <li class="border-b border-border last:border-b-0 even:bg-black/[0.016] dark:even:bg-white/[0.022]">
-            <a href={novel.url} class="flex items-center gap-2 px-3 py-2 text-xs text-foreground/80 hover:text-primary no-underline transition-colors">
-              <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-muted text-muted-foreground text-xs font-medium shrink-0">{i + 1}</span>
-              <span>{novel.title}</span>
+            <a href={novel.url} title={novel.title} target="_blank" class="group flex items-center gap-2.5 py-2 px-3.5 text-[13px] font-semibold text-[#2a2a2a] no-underline! transition-colors hover:text-primary dark:text-[#c8ccdc] dark:hover:text-primary">
+              <span class="text-[10px] font-bold text-[#ccc] min-w-[14px] text-right shrink-0 leading-none group-hover:text-primary/50 dark:text-white/[0.38] dark:group-hover:text-primary/45">{i + 1}</span>
+              {novel.title}
             </a>
           </li>
         ))}
-      </ol>
+      </ul>
     </section>
   )}
 

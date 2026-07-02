@@ -10,15 +10,96 @@ rating: 3.6
 readers: 123456
 totalChars: "5.2M"
 tags:
+  - Male
+  - Cautious
+  - Enlightenment
+  - Fast Learner
+  - Hiding True Abilities
+  - Lazy
+  - Orphans
+  - Simultaneous Transmigration
+  - Strong to Stronger
+  - Sudden Strength Gain
+  - Transmigration
+  - Weak to Strong
+  - Cheats
   - Cultivation
-  - Xianxia
+  - Fast Cultivation
+  - Special Abilities
   - System
-  - Rebirth
-  - Comedy
+  - Unique Cultivation Technique
+  - Unlimited Flow
+  - Classic
+  - Fantasy World
+  - Gate to Another World
+  - Multiple Realms
+  - World Travel
+  - Business Management
+  - Crafting
+  - Farming
+  - Leadership
+  - Loyal Subordinates
+  - Sect Development
+  - Strength-based Social Hierarchy
+  - Multiple POV
+  - Secrets
+  - Demons
+  - Immortals
+  - Saints
+tagCategories:
+  Protagonist Archetypes:
+    - Male
+    - Cautious
+    - Enlightenment
+    - Fast Learner
+    - Hiding True Abilities
+    - Lazy
+    - Orphans
+    - Simultaneous Transmigration
+    - Strong to Stronger
+    - Sudden Strength Gain
+    - Transmigration
+    - Weak to Strong
+  Power Systems:
+    - Cheats
+    - Cultivation
+    - Fast Cultivation
+    - Special Abilities
+    - System
+    - Unique Cultivation Technique
+    - Unlimited Flow
+  Worldbuilding:
+    - Classic
+    - Fantasy World
+    - Gate to Another World
+    - Multiple Realms
+    - World Travel
+  Socio-Political Structures:
+    - Business Management
+    - Crafting
+    - Farming
+    - Leadership
+    - Loyal Subordinates
+    - Sect Development
+    - Strength-based Social Hierarchy
+  Narrative:
+    - Multiple POV
+    - Secrets
+  Beings & Factions:
+    - Demons
+    - Immortals
+    - Saints
+  Miscellaneous Narrative Elements:
+    - Artifact Crafting
+    - Artifacts
+    - Daoism
+    - Pets
 genres:
-  - Action
-  - Adventure
-  - Fantasy
+  - fantasy
+  - slice-of-life
+  - supernatural
+  - wuxia
+  - xianxia
 details:
   author: "呆毛的小鹅"
   authorPinyin: "Ai Mao De Xiao E"

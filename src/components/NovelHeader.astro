@@ -29,7 +29,9 @@ const {
 
 const isMale = genres.some(g => g.toLowerCase() === "male protagonist" || g.toLowerCase() === "male");
 const displayGenres = genres.filter(g => g.toLowerCase() !== "male protagonist" && g.toLowerCase() !== "male" && g.toLowerCase() !== "female protagonist" && g.toLowerCase() !== "female");
-const genreTags = [...tags, ...displayGenres];
+const headerTagSet = new Set(["male", "cultivation", "business management", "system", "transmigration", "farming", "leadership"]);
+const headerTags = tags.filter(t => headerTagSet.has(t.toLowerCase()));
+const allHeaderChips = [...displayGenres, ...headerTags].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 ---
 
 <section class="novel-header flex flex-col gap-0 bg-card text-sm text-card-foreground has-[>img:first-child]:pt-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl shadow rounded-md ring-1 ring-foreground/20 mb-2 overflow-hidden">
@@ -126,26 +128,11 @@ const genreTags = [...tags, ...displayGenres];
       </div>
     </div>
 
-    {genreTags.length > 0 && (
+    {allHeaderChips.length > 0 && (
       <ul class="flex flex-wrap items-center gap-1 max-sm:flex-nowrap max-sm:overflow-x-auto pb-1">
-        {genres.some(g => g.toLowerCase() === "male protagonist") && (
-          <li class="inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-medium border-blue-400/50 text-blue-600 bg-blue-50 dark:border-blue-800 dark:text-blue-300 dark:bg-blue-950/30 shrink-0">
-            Male
-          </li>
-        )}
-        {genres.some(g => g.toLowerCase() === "female protagonist") && (
-          <li class="inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-medium border-pink-400/50 text-pink-600 bg-pink-50 dark:border-pink-800 dark:text-pink-300 dark:bg-pink-950/30 shrink-0">
-            Female
-          </li>
-        )}
-        {displayGenres.map(g => (
+        {allHeaderChips.map(c => (
           <li class="inline-flex items-center capitalize text-xs font-medium border rounded px-1.5 py-0.5 whitespace-nowrap transition-colors border-border/70 text-card-foreground">
-            {g}
-          </li>
-        ))}
-        {tags.map(t => (
-          <li class="inline-flex items-center capitalize text-xs font-medium border rounded px-1.5 py-0.5 whitespace-nowrap transition-colors border-border/70 text-card-foreground">
-            {t}
+            {c}
           </li>
         ))}
       </ul>

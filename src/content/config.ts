@@ -13,6 +13,7 @@ const novel = defineCollection({
     readers: z.number().optional(),
     totalChars: z.string().optional(),
     tags: z.array(z.string()).optional(),
+    tagCategories: z.record(z.string(), z.array(z.string())).optional(),
     genres: z.array(z.string()).optional(),
     details: z.object({
       author: z.string().optional(),
