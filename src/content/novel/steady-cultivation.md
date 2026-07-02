@@ -3,12 +3,12 @@ title: "Steady Cultivation: Starting with a Combination of Work and Rest"
 chineseTitle: "稳健修仙：开局词条劳逸结合"
 cover: "https://img.wtr-lab.com/cdn/series/rYhz8_l_8hvmHz7Xq5zvkPC-v2KA_2h6p8HLfwaUVxg.jpg"
 author: "Translation Team"
-status: "Ongoing"
-views: "2.3M"
+status: "Completed"
+views: "601K"
 chapters: 806
 rating: 3.6
-readers: 123456
-totalChars: "5.2M"
+readers: 1493
+totalChars: "1.68M"
 tags:
   - Male
   - Cautious
