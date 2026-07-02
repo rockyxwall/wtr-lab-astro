@@ -1,0 +1,168 @@
+---
+interface Props {
+  unlocked?: number;
+  total?: number;
+}
+
+const { unlocked = 806, total = 806 } = Astro.props;
+const isComplete = unlocked >= total;
+const pct = total > 0 ? Math.min(100, (unlocked / total) * 100) : 0;
+---
+
+<section class="unlock-progress-card" aria-labelledby="unlock-heading">
+  <h2 id="unlock-heading" class="sr-only">AI-Unlock Progress</h2>
+  <div class="upc-header">
+    <div class="upc-label">
+      <svg class="icon inline-flex shrink-0 size-6 icon-sm"><use href="#ticket" class="svg-ticket"></use></svg>
+      <span>AI-Unlock Progress</span>
+    </div>
+    <div class="upc-counter">
+      <span class="upc-unlocked">{unlocked}</span>
+      <span class="upc-sep">/</span>
+      <span class="upc-total">{total}</span>
+    </div>
+  </div>
+  <div class="upc-track">
+    <div class="upc-fill" class:list={[isComplete && "is-complete"]} style={`width: ${pct}%;`}></div>
+  </div>
+  <div class="upc-footer">
+    {isComplete ? (
+      <span class="upc-status-done"><span>All chapters unlocked</span></span>
+    ) : (
+      <span class="upc-status">{unlocked}/{total} unlocked</span>
+    )}
+    {!isComplete && (
+      <button type="button" class="upc-batch-btn">Batch Unlock</button>
+    )}
+  </div>
+</section>
+
+<style>
+  .unlock-progress-card {
+    background: #fff;
+    border: 1px solid rgba(253, 126, 20, 0.22);
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    padding: 14px 16px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+  }
+  .dark .unlock-progress-card {
+    background: linear-gradient(135deg, #1a1c24 0%, #252836 100%);
+    border-color: rgba(253, 126, 20, 0.18);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25), inset 0 1px rgba(255, 255, 255, 0.04);
+  }
+
+  .upc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .upc-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #c96a00;
+  }
+  .dark .upc-label {
+    color: rgba(253, 126, 20, 0.8);
+  }
+  .upc-counter {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+  }
+  .upc-unlocked {
+    color: #fd7e14;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .upc-sep {
+    color: #ccc;
+    font-size: 13px;
+  }
+  .dark .upc-sep {
+    color: rgba(255, 255, 255, 0.25);
+  }
+  .upc-total {
+    color: #999;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .dark .upc-total {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .upc-track {
+    background: #f0f0f0;
+    border-radius: 3px;
+    height: 5px;
+    margin-bottom: 9px;
+    overflow: hidden;
+  }
+  .dark .upc-track {
+    background: rgba(255, 255, 255, 0.07);
+  }
+  .upc-fill {
+    background: linear-gradient(90deg, #d96b0a, #fd7e14, #ffaa60);
+    border-radius: 3px;
+    height: 100%;
+    transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .upc-fill.is-complete {
+    background: linear-gradient(90deg, #15803d, #22c55e, #4ade80);
+  }
+  .dark .upc-fill {
+    box-shadow: 0 0 10px rgba(253, 126, 20, 0.55);
+  }
+  .dark .upc-fill.is-complete {
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.55);
+  }
+
+  .upc-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+  .upc-status {
+    color: #999;
+    font-size: 11px;
+  }
+  .dark .upc-status {
+    color: rgba(255, 255, 255, 0.38);
+  }
+  .upc-status-done {
+    color: #16a34a;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .dark .upc-status-done {
+    color: #4ade80;
+  }
+  .upc-batch-btn {
+    color: #c96a00;
+    cursor: pointer;
+    white-space: nowrap;
+    background: rgba(253, 126, 20, 0.08);
+    border: 1px solid rgba(253, 126, 20, 0.35);
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .dark .upc-batch-btn {
+    color: #fd7e14;
+    background: rgba(253, 126, 20, 0.12);
+    border-color: rgba(253, 126, 20, 0.3);
+  }
+</style>

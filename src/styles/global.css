@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@variant dark (&:is(.dark *));
+
+@theme {
+  --color-background: #f2f3f4;
+  --color-foreground: #1b1d23;
+  --color-navbar: #212529;
+  --color-card: #fff;
+  --color-card-foreground: #212529;
+  --color-popover: #fff;
+  --color-popover-foreground: #212529;
+  --color-primary: #4288c9;
+  --color-primary-foreground: #eef2ff;
+  --color-secondary: #dce3e9;
+  --color-secondary-foreground: #18181b;
+  --color-muted: #dee6ed;
+  --color-muted-foreground: #7d8283;
+  --color-accent: #dce3e9;
+  --color-accent-foreground: #1b2328;
+  --color-destructive: #dc3545;
+  --color-destructive-foreground: #fff;
+  --color-border: #d4dadb;
+  --color-input: #a7adb4;
+  --color-ring: #4288c9;
+  --color-wtr: #fd7e14;
+  --color-wtr-foreground: #fff;
+  --color-gold: #ffc107;
+  --color-silver: silver;
+  --color-bronze: #cd7f32;
+  --color-review-rate-1: #ef4444;
+  --color-review-rate-2: #f97316;
+  --color-review-rate-3: #eab308;
+  --color-review-rate-4: #84cc16;
+  --color-review-rate-5: #22c55e;
+}
+
+.dark {
+  --color-background: #1b1d23;
+  --color-foreground: #a9a9a9;
+  --color-card: #1f2129;
+  --color-card-foreground: #ccc;
+  --color-popover: #23272c;
+  --color-popover-foreground: #ccc;
+  --color-primary: #5795d9;
+  --color-primary-foreground: #eef2ff;
+  --color-secondary: #444e5b;
+  --color-secondary-foreground: #eee;
+  --color-muted: #111;
+  --color-muted-foreground: #a9b1b7;
+  --color-accent: #47566c;
+  --color-accent-foreground: #fafafa;
+  --color-destructive: #dc3545;
+  --color-destructive-foreground: #fff;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-input: rgba(255, 255, 255, 0.15);
+  --color-ring: #5795d9;
+  --color-navbar: #212529;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.icon {
+  fill: currentColor;
+  transform-origin: 50%;
+  transform-box: fill-box;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  transition: transform 0.15s;
+}
+
+
+.wrap-break-word {
+  overflow-wrap: break-word;
+}
+
+.wtr-scroll {
+  scrollbar-width: thin;
+}
+
+.icon-sm {
+  width: 20px;
+  height: 20px;
+}
+
+.status {
+  z-index: 1;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 1px 6px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.status.top-right {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+.image-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.chapter-body,
+.chapter-theme {
+  background-color: #1f2129 !important;
+  color: inherit !important;
+}
+
+.chapter-bg {
+  background-color: #1b1d23 !important;
+}

@@ -1,0 +1,173 @@
+---
+import type { InferEntrySchema } from 'astro:content';
+
+interface Patron {
+  name: string;
+  amount: number;
+  rank?: number;
+}
+
+interface OtherNovel {
+  title: string;
+  url: string;
+}
+
+interface Props {
+  details?: InferEntrySchema<'novel'>['details'];
+  rankings?: InferEntrySchema<'novel'>['rankings'];
+  patrons?: Patron[];
+  otherNovels?: OtherNovel[];
+  slug?: string;
+}
+
+const {
+  details,
+  rankings,
+  patrons = [],
+  otherNovels = [],
+  slug = "",
+} = Astro.props;
+---
+
+<div role="tabpanel" tabindex="0" data-index="0" data-slot="tabs-content" data-active data-orientation="horizontal" data-activation-direction="left">
+  <section aria-labelledby="summary-heading">
+    <h2 id="summary-heading" class="flex items-center gap-2 mt-4 mb-2 pl-2.5 border-l-2 border-l-primary text-base font-semibold text-card-foreground">
+      Novel Summary
+    </h2>
+    <div class="desc-wrap text-foreground">
+      <span class="description ">
+        <slot name="content" />
+      </span>
+    </div>
+  </section>
+
+  {otherNovels.length > 0 && (
+    <section aria-labelledby="other-novels-heading">
+      <h2 id="other-novels-heading" class="flex items-center gap-2 mt-4 mb-2 pl-2.5 border-l-2 border-l-primary text-base font-semibold text-card-foreground">
+        Author's Other Novels
+      </h2>
+      <ol class="list-none border border-border rounded-lg overflow-hidden mb-4">
+        {otherNovels.map((novel, i) => (
+          <li class="border-b border-border last:border-b-0 even:bg-black/[0.016] dark:even:bg-white/[0.022]">
+            <a href={novel.url} class="flex items-center gap-2 px-3 py-2 text-xs text-foreground/80 hover:text-primary no-underline transition-colors">
+              <span class="inline-flex items-center justify-center w-5 h-5 rounded bg-muted text-muted-foreground text-xs font-medium shrink-0">{i + 1}</span>
+              <span>{novel.title}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+
+  <section aria-labelledby="details-heading">
+    <h2 id="details-heading" class="flex items-center gap-2 mt-4 mb-2 pl-2.5 border-l-2 border-l-primary text-base font-semibold text-card-foreground">
+      Details
+    </h2>
+    <div class="rounded-lg border border-border overflow-hidden mb-4">
+      <div class="grid grid-cols-[108px_1fr] text-xs">
+        <div class="px-3 py-2 font-medium text-muted-foreground bg-muted/30 even:bg-transparent border-b border-border">Status</div>
+        <div class="px-3 py-2 text-foreground/80 border-b border-border even:bg-black/[0.016] dark:even:bg-white/[0.022]">{details?.status || "Unknown"}</div>
+
+        {details?.dateAdded && (
+          <>
+            <div class="px-3 py-2 font-medium text-muted-foreground bg-muted/30 even:bg-transparent border-b border-border">Date Added</div>
+            <div class="px-3 py-2 text-foreground/80 border-b border-border even:bg-black/[0.016] dark:even:bg-white/[0.022]">{details.dateAdded}</div>
+          </>
+        )}
+
+        {(details?.author || details?.authorPinyin) && (
+          <>
+            <div class="px-3 py-2 font-medium text-muted-foreground bg-muted/30 even:bg-transparent border-b border-border">Author</div>
+            <div class="px-3 py-2 text-foreground/80 border-b border-border even:bg-black/[0.016] dark:even:bg-white/[0.022]">
+              {details?.authorUrl ? (
+                <a href={details.authorUrl} class="text-primary hover:underline">{details.author}</a>
+              ) : (
+                <span>{details?.author}</span>
+              )}
+              {details?.authorPinyin && <span class="text-muted-foreground ml-1">({details.authorPinyin})</span>}
+            </div>
+          </>
+        )}
+
+        {details?.requested && (
+          <>
+            <div class="px-3 py-2 font-medium text-muted-foreground bg-muted/30 even:bg-transparent border-b border-border">Requested</div>
+            <div class="px-3 py-2 text-foreground/80 border-b border-border even:bg-black/[0.016] dark:even:bg-white/[0.022]">
+              {details.requestedUrl ? (
+                <a href={details.requestedUrl} class="text-primary hover:underline">{details.requested}</a>
+              ) : (
+                <span>{details.requested}</span>
+              )}
+            </div>
+          </>
+        )}
+
+        {details?.year && (
+          <>
+            <div class="px-3 py-2 font-medium text-muted-foreground bg-muted/30 even:bg-transparent border-b border-border">Year</div>
+            <div class="px-3 py-2 text-foreground/80 border-b border-border even:bg-black/[0.016] dark:even:bg-white/[0.022]">{details.year}</div>
+          </>
+        )}
+
+        {details?.origin && (
+          <>
+            <div class="px-3 py-2 font-medium text-muted-foreground bg-muted/30 even:bg-transparent border-b border-border">Origin</div>
+            <div class="px-3 py-2 text-foreground/80 border-b border-border even:bg-black/[0.016] dark:even:bg-white/[0.022]">{details.origin}</div>
+          </>
+        )}
+
+        {details?.language && (
+          <>
+            <div class="px-3 py-2 font-medium text-muted-foreground bg-muted/30 even:bg-transparent border-b border-border">Language</div>
+            <div class="px-3 py-2 text-foreground/80 border-b border-border even:bg-black/[0.016] dark:even:bg-white/[0.022]">{details.language}</div>
+          </>
+        )}
+
+        {rankings && (rankings.weekly || rankings.allTime) && (
+          <>
+            <div class="px-3 py-2 font-medium text-muted-foreground bg-muted/30 even:bg-transparent border-b border-border">Rankings</div>
+            <div class="px-3 py-2 text-foreground/80 border-b border-border even:bg-black/[0.016] dark:even:bg-white/[0.022]">
+              <div class="flex flex-wrap gap-2">
+                {rankings.weekly && <span class="text-xs">Weekly #{rankings.weekly}</span>}
+                {rankings.allTime && <span class="text-xs">All Time #{rankings.allTime}</span>}
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  </section>
+
+  {patrons.length > 0 && (
+    <section aria-labelledby="patrons-heading">
+      <h2 id="patrons-heading" class="flex items-center gap-2 mt-4 mb-2 pl-2.5 border-l-2 border-l-primary text-base font-semibold text-card-foreground">
+        <svg class="icon inline-flex shrink-0 size-4 text-wtr me-1"><use href="#crown"></use></svg>
+        Novel Patrons
+      </h2>
+      <ul class="rounded-lg border border-border overflow-hidden mb-2">
+        {patrons.map(patron => (
+          <li class="flex items-center justify-between px-3 py-2 text-xs border-b border-border last:border-b-0 even:bg-black/[0.016] dark:even:bg-white/[0.022]">
+            <div class="flex items-center gap-2">
+              <span
+                class="inline-flex items-center justify-center w-5 h-5 rounded text-xs font-bold shrink-0"
+                class:list={[
+                  patron.rank === 1 ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300" : "",
+                  patron.rank === 2 ? "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300" : "",
+                  patron.rank === 3 ? "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300" : "",
+                  patron.rank && patron.rank > 3 ? "bg-muted text-muted-foreground" : "",
+                ]}
+              >
+                {patron.rank}
+              </span>
+              <span class="text-foreground/80">{patron.name}</span>
+            </div>
+            <span class="text-wtr font-medium">
+              <svg class="icon inline-flex shrink-0 size-3 me-0.5"><use href="#ticket"></use></svg>
+              {patron.amount}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+</div>
