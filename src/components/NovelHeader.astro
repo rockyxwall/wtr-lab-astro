@@ -47,7 +47,7 @@ const statusKey = status.toLowerCase();
 const sColor = statusColorMap[statusKey] || defaultStatusColor;
 ---
 
-<section class="novel-header flex flex-col gap-0 bg-card text-sm text-card-foreground has-[>img:first-child]:pt-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl rounded-md fix-size fix-edge mb-2 overflow-hidden">
+<section class="novel-header flex flex-col gap-0 bg-card text-sm text-card-foreground has-[>img:first-child]:pt-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl shadow rounded-md ring-1 ring-foreground/20 fix-size fix-edge mb-2 overflow-hidden">
   <div class="p-2">
     <div class="flex items-center justify-between gap-2 mb-3">
       <div class="flex-1 min-w-0">
@@ -66,7 +66,7 @@ const sColor = statusColorMap[statusKey] || defaultStatusColor;
       </div>
     </div>
 
-    <div class="flex w-full rounded-lg border bg-card/50 overflow-hidden mb-3">
+    <div class="flex w-full rounded-lg border border-border/50 dark:border-white/15 bg-card/50 overflow-hidden mb-3">
       <figure class="shrink-0">
         <div class="image-wrap relative rounded-md h-full w-30 sm:w-40 rounded-none zoom group cursor-pointer">
           <div class="absolute inset-0 z-10 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors duration-200 rounded-md">
