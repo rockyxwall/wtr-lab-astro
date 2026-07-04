@@ -9,7 +9,7 @@ const isComplete = unlocked >= total;
 const pct = total > 0 ? Math.min(100, (unlocked / total) * 100) : 0;
 ---
 
-<section class="unlock-progress-card fix-size fix-edge" aria-labelledby="unlock-heading">
+<section class="unlock-progress-card fix-size fix-edge rounded-none md:rounded-[10px]" aria-labelledby="unlock-heading">
   <h2 id="unlock-heading" class="sr-only">AI-Unlock Progress</h2>
   <div class="upc-header">
     <div class="upc-label">
