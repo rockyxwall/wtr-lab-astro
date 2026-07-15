@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "fetch-baselines": "node scripts/fetch-baselines.mjs",
     "visual-compare": "astro build && node scripts/visual-compare.mjs"
   },
   "dependencies": {

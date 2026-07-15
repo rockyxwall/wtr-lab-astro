@@ -33,6 +33,8 @@
   --color-review-rate-3: #eab308;
   --color-review-rate-4: #84cc16;
   --color-review-rate-5: #22c55e;
+  --color-discord: #5865f2;
+  --color-discord-foreground: #fff;
 }
 
 .dark {

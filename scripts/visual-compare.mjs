@@ -15,15 +15,25 @@ const VIEWPORTS = [
   { name: 'mobile-375',   width: 375,  height: 812 },
 ];
 
-const REF_HTML = `file:///${ROOT.replace(/\\/g, '/')}/reference/single-page/single-page.html`;
-const ASTRO_URL = 'http://localhost:4321/novel/steady-cultivation';
-const OUT_DIR = join(ROOT, 'screenshot-diffs');
+const PAGES = [
+  {
+    name: 'novel',
+    refUrl: `file:///${ROOT.replace(/\\/g, '/')}/.temp/download/novel/single-page.html`,
+    astroUrl: 'http://localhost:4321/novel/steady-cultivation'
+  },
+  {
+    name: 'homepage',
+    refUrl: `file:///${ROOT.replace(/\\/g, '/')}/.temp/download/homepage/single-page.html`,
+    astroUrl: 'http://localhost:4321/'
+  }
+];
 
-async function takeScreenshot(page, url, viewport, label) {
+const OUT_DIR = join(ROOT, '.temp', 'visual-compare');
+
+async function takeScreenshot(page, url, viewport, path) {
   await page.setViewportSize({ width: viewport.width, height: viewport.height });
   await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
   await page.waitForTimeout(3000);
-  const path = join(OUT_DIR, `${label}-${viewport.name}.png`);
   await page.screenshot({ path });
   return path;
 }
@@ -47,48 +57,64 @@ async function main() {
   const page = await context.newPage();
 
   console.log('=== Screenshot Visual Comparison ===\n');
-  console.log(`Reference: ${REF_HTML}`);
-  console.log(`Astro:     ${ASTRO_URL}\n`);
 
   const results = [];
 
-  for (const vp of VIEWPORTS) {
-    console.log(`\n--- ${vp.name} (${vp.width}x${vp.height}) ---`);
+  for (const pageConfig of PAGES) {
+    console.log(`\n========================================`);
+    console.log(`Testing Page: ${pageConfig.name.toUpperCase()}`);
+    console.log(`Reference:    ${pageConfig.refUrl}`);
+    console.log(`Astro:        ${pageConfig.astroUrl}`);
+    console.log(`========================================\n`);
 
-    const refPath = await takeScreenshot(page, REF_HTML, vp, 'reference');
-    console.log(`  Reference: ${refPath}`);
+    const pageDir = join(OUT_DIR, pageConfig.name);
+    if (!existsSync(pageDir)) mkdirSync(pageDir, { recursive: true });
 
-    const astroPath = await takeScreenshot(page, ASTRO_URL, vp, 'astro');
-    console.log(`  Astro:     ${astroPath}`);
+    for (const vp of VIEWPORTS) {
+      console.log(`\n--- ${pageConfig.name} - ${vp.name} (${vp.width}x${vp.height}) ---`);
 
-    let refImg = PNG.sync.read(readFileSync(refPath));
-    let astroImg = PNG.sync.read(readFileSync(astroPath));
+      const refPath = join(pageDir, `reference-${vp.name}.png`);
+      const astroPath = join(pageDir, `astro-${vp.name}.png`);
+      const diffPath = join(pageDir, `diff-${vp.name}.png`);
 
-    const w = refImg.width;
-    const h = refImg.height;
-    const diff = new PNG({ width: w, height: h });
+      await takeScreenshot(page, pageConfig.refUrl, vp, refPath);
+      console.log(`  Reference: ${refPath}`);
 
-    const mismatched = pixelmatch(refImg.data, astroImg.data, diff.data, w, h, {
-      threshold: 0.15,
-      alpha: 0.5,
-    });
+      await takeScreenshot(page, pageConfig.astroUrl, vp, astroPath);
+      console.log(`  Astro:     ${astroPath}`);
 
-    const diffPath = join(OUT_DIR, `diff-${vp.name}.png`);
-    writeFileSync(diffPath, PNG.sync.write(diff));
+      let refImg = PNG.sync.read(readFileSync(refPath));
+      let astroImg = PNG.sync.read(readFileSync(astroPath));
 
-    const totalPx = w * h;
-    const pct = (mismatched / totalPx) * 100;
-    const pass = pct < 5;
-    results.push({ viewport: vp.name, mismatched, total: totalPx, percent: pct.toFixed(2), pass, diffPath });
-    console.log(`  Diff:      ${diffPath}`);
-    console.log(`  Result:    ${pass ? 'PASS' : 'FAIL'} (${mismatched}/${totalPx} = ${pct.toFixed(2)}%)`);
+      // Ensure they have matching dimensions before pixelmatch comparison
+      refImg = ensureSameSize(refImg, astroImg);
+      astroImg = ensureSameSize(refImg, astroImg); // refImg width/height was updated if needed
+
+      const w = refImg.width;
+      const h = refImg.height;
+      const diff = new PNG({ width: w, height: h });
+
+      const mismatched = pixelmatch(refImg.data, astroImg.data, diff.data, w, h, {
+        threshold: 0.15,
+        alpha: 0.5,
+      });
+
+      writeFileSync(diffPath, PNG.sync.write(diff));
+
+      const totalPx = w * h;
+      const pct = (mismatched / totalPx) * 100;
+      const pass = pct < 5;
+      results.push({ page: pageConfig.name, viewport: vp.name, mismatched, total: totalPx, percent: pct.toFixed(2), pass, diffPath });
+      console.log(`  Diff:      ${diffPath}`);
+      console.log(`  Result:    ${pass ? 'PASS' : 'FAIL'} (${mismatched}/${totalPx} = ${pct.toFixed(2)}%)`);
+    }
   }
 
   await browser.close();
 
   console.log('\n=== SUMMARY ===');
   for (const r of results) {
-    console.log(`  ${r.viewport}: ${r.pass ? '✓' : '✗'} ${r.mismatched} px (${r.percent}%)`);
+    console.log(`  [${r.page.toUpperCase()}] ${r.viewport}: ${r.pass ? '✓' : '✗'} ${r.mismatched} px (${r.percent}%)`);
   }
 
   const allPass = results.every(r => r.pass);
@@ -101,3 +127,4 @@ main().catch(err => {
   console.error('Error:', err);
   process.exit(1);
 });
+

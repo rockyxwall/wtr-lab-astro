@@ -1,6 +1,5 @@
-download
+.temp
 nul
 node_modules
 dist
 .astro
-screenshot-diffs
