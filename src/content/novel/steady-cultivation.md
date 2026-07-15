@@ -100,25 +100,10 @@ genres:
   - supernatural
   - wuxia
   - xianxia
-details:
-  author: "呆毛的小鹅"
-  authorPinyin: "Ai Mao De Xiao E"
-  authorUrl: "https://wtr-lab.com/en/author/%E5%91%86%E6%AF%9B%E7%9A%84%E5%B0%8F%E9%B9%85"
-  status: "Completed"
-  dateAdded: "May 6, 2025"
-  requested: "Shadow_King"
-  requestedUrl: "https://wtr-lab.com/en/user/Shadow_King"
-  year: 2025
-  origin: "CN"
-  language: "Chinese"
-rankings:
-  weekly: 42
-  allTime: 156
 dataFiles:
   chapters: "steady-cultivation"
   reviews: "steady-cultivation"
   recommendations: "steady-cultivation"
-  patrons: "steady-cultivation"
 ---
 
 [Cultivating Immortals] + [Steady] + [Playing Pigs to Eat Tigers] + [Entries] + [Fame] + [Lie Down] + [Longevity] + [Farming]
@@ -140,3 +125,30 @@ While others were honing their skills, Su Yuan was practicing his fishing techni
 In short, Su Yuan never returned from his path of lying down and cultivating immortality.
 
 As for the system asking me to increase my fame? Whoever improves it is an idiot!
+
+## Author's Other Novels
+1. [Steady Cultivation: Grab It in One Go, Decompose It in an Instant](https://wtr-lab.com/en/novel/66609/steady-cultivation-grab-it-in-one-go-decompose-it-in-an-instant)
+2. [Start by Synthesizing Enlightenment Tea, Be Steady and Cautious](https://wtr-lab.com/en/novel/11179/start-by-synthesizing-enlightenment-tea-be-steady-and-cautious)
+3. [Xiuxian: I am the Master of Dreams](https://wtr-lab.com/en/novel/12048/xiuxian-i-am-the-master-of-dreams)
+4. [Steady Immortal Cultivation: My gain effect is randomly doubled](https://wtr-lab.com/en/novel/8337/steady-immortal-cultivation-my-gain-effect-is-randomly-doubled)
+
+## Details
+| Detail | Value |
+| :--- | :--- |
+| **Titles** | Steady Cultivation: Starting with a Combination of Work and Rest<br>稳健修仙：开局词条劳逸结合 |
+| **Status** | Completed |
+| **Date Added** | May 6, 2025 |
+| **Author** | [呆毛的小鹅](https://wtr-lab.com/en/author/%E5%91%86%E6%AF%9B%E7%9A%84%E5%B0%8F%E9%B9%85) (Ai Mao De Xiao E) |
+| **Requested** | [Shadow_King](https://wtr-lab.com/en/user/Shadow_King) |
+| **Year** | 2025 |
+| **Origin** | CN |
+| **Language** | Chinese |
+| **Rankings** | [Weekly #42](#) / [All Time #156](#) |
+
+## Novel Patrons
+1. Julius **150**
+2. Goewin **97.15**
+3. Shadow_King **50**
+4. Reader4 **25**
+5. Reader5 **10**
+6. Hello **2000**

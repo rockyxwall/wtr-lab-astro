@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./markdown.css";
 
 @variant dark (&:is(.dark *));
 
@@ -272,25 +273,4 @@ html {
 
 .desc-wrap {
   font-size: 14px;
-}
-
-.desc-wrap .swap {
-  cursor: pointer;
-  z-index: 2;
-  font-weight: 600;
-  text-decoration: underline;
-  position: relative;
-}
-
-.desc-wrap .description p {
-  margin-bottom: 4px;
-  line-height: 1.6;
-  font-weight: 400;
-}
-
-.description {
-  max-height: 10.5em;
-  display: block;
-  position: relative;
-  overflow: hidden;
 }

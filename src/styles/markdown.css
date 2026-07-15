@@ -1,0 +1,287 @@
+/* Styled Markdown Headers inside Description */
+.markdown-content h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0.625rem;
+  border-left: 2px solid var(--color-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-card-foreground);
+}
+
+/* Crown icon for Patrons heading */
+.markdown-content h2#novel-patrons::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  background-color: var(--color-wtr);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12,2L15,9L22,9L17,14L18,21L12,17.5L6,21L7,14L2,9L9,9L12,2Z'/%3E%3C/svg%3E") no-repeat center / contain;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12,2L15,9L22,9L17,14L18,21L12,17.5L6,21L7,14L2,9L9,9L12,2Z'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* Styled Lists */
+.markdown-content ol,
+.markdown-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* List Items Common Base */
+.markdown-content ol li,
+.markdown-content ul li {
+  border-bottom: 1px solid var(--color-border);
+  font-size: 13px;
+  font-weight: 600;
+  color: #2a2a2a;
+}
+
+.dark .markdown-content ol li,
+.dark .markdown-content ul li {
+  color: #c8ccdc;
+}
+
+.markdown-content ol li:last-child,
+.markdown-content ul li:last-child {
+  border-bottom: 0;
+}
+
+/* Zebra Striping */
+.markdown-content ol li:nth-child(even),
+.markdown-content ul li:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.016);
+}
+
+.dark .markdown-content ol li:nth-child(even),
+.dark .markdown-content ul li:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.022);
+}
+
+/* Case 1: Plain text list items */
+.markdown-content ol li:not(:has(a)),
+.markdown-content ul li:not(:has(a)) {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.875rem;
+}
+
+/* Case 2: Link list items */
+.markdown-content ol li:has(a),
+.markdown-content ul li:has(a) {
+  display: flex;
+  align-items: center;
+}
+
+.markdown-content ol li a,
+.markdown-content ul li a {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 0.875rem;
+  color: inherit;
+  text-decoration: none !important;
+  transition: color 0.15s;
+}
+
+.markdown-content ol li a:hover,
+.markdown-content ul li a:hover {
+  color: var(--color-primary);
+}
+
+/* Custom Ordered List Indexing using CSS Counters */
+.markdown-content ol {
+  counter-reset: md-li-counter;
+}
+
+.markdown-content ol li::before {
+  counter-increment: md-li-counter;
+  content: counter(md-li-counter);
+  font-size: 10px;
+  font-weight: 700;
+  color: #ccc;
+  min-w: 14px;
+  text-align: right;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.dark .markdown-content ol li::before {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+/* Shift index number inside the clickable padding if list contains links */
+.markdown-content ol li:has(a)::before {
+  margin-left: 0.875rem;
+}
+
+/* Link Hover Effect on index numbers */
+.markdown-content ol li:has(a:hover)::before {
+  color: var(--color-primary);
+  opacity: 0.5;
+}
+
+/* Details Table Styling */
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  display: table;
+}
+
+.markdown-content table thead {
+  display: none; /* Hide header row */
+}
+
+.markdown-content table tr {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.markdown-content table tr:last-child {
+  border-bottom: 0;
+}
+
+.markdown-content table tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.016);
+}
+
+.dark .markdown-content table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.022);
+}
+
+.markdown-content table td {
+  padding: 0.5625rem 0.875rem; /* py-[9px] px-3.5 */
+  font-size: 13px;
+  text-align: left;
+  line-height: 1.6;
+}
+
+/* Detail Keys Column */
+.markdown-content table td:first-child {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-muted-foreground);
+  width: 108px;
+  min-w: 108px;
+  white-space: nowrap;
+}
+
+.markdown-content table td:last-child {
+  color: var(--color-foreground);
+}
+
+.markdown-content table td:last-child a {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.markdown-content table td:last-child a:hover {
+  color: var(--color-primary);
+}
+
+/* Patrons List Special Styling */
+#novel-patrons + ol {
+  counter-reset: patron-counter;
+}
+
+#novel-patrons + ol li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem; /* px-3 py-2 */
+  font-size: 12px; /* text-xs */
+  border-bottom: 1px solid var(--color-border);
+}
+
+#novel-patrons + ol li:last-child {
+  border-bottom: 0;
+}
+
+#novel-patrons + ol li::before {
+  counter-increment: patron-counter;
+  content: counter(patron-counter);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem; /* w-5 */
+  height: 1.25rem; /* h-5 */
+  border-radius: 0.25rem; /* rounded */
+  font-size: 0.75rem; /* text-xs */
+  font-weight: 700; /* font-bold */
+  margin-right: 0.5rem; /* gap-2 */
+  flex-shrink: 0;
+}
+
+/* Rank Badge Colors */
+#novel-patrons + ol li:nth-child(1)::before {
+  background-color: #fef9c3; /* bg-yellow-100 */
+  color: #a16207; /* text-yellow-700 */
+}
+.dark #novel-patrons + ol li:nth-child(1)::before {
+  background-color: rgba(250, 204, 21, 0.15); /* bg-yellow-900/30 */
+  color: #fde047; /* text-yellow-300 */
+}
+
+#novel-patrons + ol li:nth-child(2)::before {
+  background-color: #f3f4f6; /* bg-gray-100 */
+  color: #4b5563; /* text-gray-600 */
+}
+.dark #novel-patrons + ol li:nth-child(2)::before {
+  background-color: #1f2937; /* bg-gray-800 */
+  color: #d1d5db; /* text-gray-300 */
+}
+
+#novel-patrons + ol li:nth-child(3)::before {
+  background-color: #ffedd5; /* bg-orange-100 */
+  color: #c2410c; /* text-orange-700 */
+}
+.dark #novel-patrons + ol li:nth-child(3)::before {
+  background-color: rgba(249, 115, 22, 0.15); /* bg-orange-900/30 */
+  color: #fdba74; /* text-orange-300 */
+}
+
+#novel-patrons + ol li:nth-child(n+4)::before {
+  background-color: var(--color-muted); /* bg-muted */
+  color: var(--color-muted-foreground); /* text-muted-foreground */
+}
+
+/* Right-align amount with ticket SVG mask */
+#novel-patrons + ol li strong {
+  margin-left: auto;
+  color: var(--color-wtr);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+}
+
+#novel-patrons + ol li strong::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+  background-color: var(--color-wtr);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20,12A2,2 0 0,0 22,14V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V14A2,2 0 0,0 4,12A2,2 0 0,0 2,10V6A2,2 0 0,1 4,4H20A2,2 0 0,1 22,6V10A2,2 0 0,0 20,12M4,6V8.54C5.24,9.23 6,10.53 6,12C6,13.47 5.24,14.77 4,15.46V18H9V6H4M15,12C15,10.46 14.42,9.06 13.5,8H18V16H13.5C14.42,14.94 15,13.54 15,12Z'/%3E%3C/svg%3E") no-repeat center / contain;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20,12A2,2 0 0,0 22,14V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V14A2,2 0 0,0 4,12A2,2 0 0,0 2,10V6A2,2 0 0,1 4,4H20A2,2 0 0,1 22,6V10A2,2 0 0,0 20,12M4,6V8.54C5.24,9.23 6,10.53 6,12C6,13.47 5.24,14.77 4,15.46V18H9V6H4M15,12C15,10.46 14.42,9.06 13.5,8H18V16H13.5C14.42,14.94 15,13.54 15,12Z'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* Paragraph styles inside markdown content */
+.markdown-content p {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+  font-weight: 400;
+}

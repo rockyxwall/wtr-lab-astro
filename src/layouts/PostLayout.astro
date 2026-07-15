@@ -29,33 +29,18 @@ interface Recommendation {
   url?: string;
 }
 
-interface Patron {
-  name: string;
-  amount: number;
-  rank?: number;
-}
-
-interface OtherNovel {
-  title: string;
-  url: string;
-}
-
 interface Props {
   frontmatter: InferEntrySchema<'novel'>;
-  patrons?: Patron[];
   chaptersList?: Chapter[];
   reviewsData?: ReviewsData;
   recommendationsList?: Recommendation[];
-  otherNovels?: OtherNovel[];
 }
 
 const {
   frontmatter,
-  patrons = [],
   chaptersList = [],
   reviewsData,
   recommendationsList = [],
-  otherNovels = [],
 } = Astro.props;
 ---
 
@@ -97,15 +82,9 @@ const {
           </div>
 
           <TabAbout
-            details={frontmatter.details}
-            rankings={frontmatter.rankings}
-            patrons={patrons}
-            otherNovels={otherNovels}
             tags={frontmatter.tags}
             genres={frontmatter.genres}
             tagCategories={frontmatter.tagCategories}
-            title={frontmatter.title}
-            chineseTitle={frontmatter.chineseTitle}
           >
             <Fragment slot="content">
               <slot name="content" />
