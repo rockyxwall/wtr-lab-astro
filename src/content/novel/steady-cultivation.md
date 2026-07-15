@@ -138,12 +138,12 @@ As for the system asking me to increase my fame? Whoever improves it is an idiot
 | **Titles** | Steady Cultivation: Starting with a Combination of Work and Rest<br>稳健修仙：开局词条劳逸结合 |
 | **Status** | Completed |
 | **Date Added** | May 6, 2025 |
-| **Author** | [呆毛的小鹅](https://wtr-lab.com/en/author/%E5%91%86%E6%AF%9B%E7%9A%84%E5%B0%8F%E9%B9%85) (Ai Mao De Xiao E) |
+| **Author** | [呆毛的小鹅](https://wtr-lab.com/en/author/%E5%91%86%E6%AF%9B%E7%9A%84%E5%B0%8F%E9%B9%85)<br>[Ai Mao De Xiao E](https://wtr-lab.com/en/author/%E5%91%86%E6%AF%9B%E7%9A%84%E5%B0%8F%E9%B9%85) |
 | **Requested** | [Shadow_King](https://wtr-lab.com/en/user/Shadow_King) |
 | **Year** | 2025 |
 | **Origin** | CN |
 | **Language** | Chinese |
-| **Rankings** | [Weekly #42](#) / [All Time #156](#) |
+| **Rankings** | [Weekly **#42**](#) [All Time **#156**](#) |
 
 ## Novel Patrons
 1. Julius **150**
