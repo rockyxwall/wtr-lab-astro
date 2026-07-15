@@ -41,12 +41,7 @@
   border-bottom: 1px solid var(--color-border);
   font-size: 13px;
   font-weight: 600;
-  color: #2a2a2a;
-}
-
-.dark .markdown-content ol li,
-.dark .markdown-content ul li {
-  color: #c8ccdc;
+  color: var(--color-card-foreground);
 }
 
 .markdown-content ol li:last-child,
@@ -188,7 +183,7 @@
 }
 
 .markdown-content table td:last-child {
-  color: var(--color-foreground);
+  color: var(--color-card-foreground);
 }
 
 .markdown-content table td:last-child a {
