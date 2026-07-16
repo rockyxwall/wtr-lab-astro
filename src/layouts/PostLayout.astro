@@ -65,7 +65,7 @@ const {
 
     <section class="flex flex-col gap-0 bg-card text-sm text-card-foreground has-[>img:first-child]:pt-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl shadow rounded-none md:rounded-md ring-1 ring-foreground/20 mb-2 overflow-hidden" aria-label="Novel detail tabs">
       <div class="p-2 chapter-details">
-        <div data-horizontal class="group/tabs flex gap-2 data-horizontal:flex-col new-pills">
+        <div data-orientation="horizontal" class="group/tabs flex gap-2 data-horizontal:flex-col new-pills">
           <div role="tablist" class="group/tabs-list items-center justify-center rounded-lg text-muted-foreground bg-border h-auto grid w-full grid-cols-2 sm:grid-cols-4 gap-1 p-1">
             <button role="tab" aria-selected="true" data-active class="inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 text-sm font-medium whitespace-nowrap transition-all outline-none py-2 h-10 bg-background shadow-sm text-foreground">
               About
@@ -142,9 +142,8 @@ const {
 </BaseLayout>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var tablist = document.querySelector('[role="tablist"]');
-    if (!tablist) return;
+  var tablist = document.querySelector('[role="tablist"]');
+  if (tablist) {
     var tabs = tablist.querySelectorAll('[role="tab"]');
     var panels = document.querySelectorAll('[role="tabpanel"]');
     tabs.forEach(function(tab, i) {
@@ -170,6 +169,6 @@ const {
         });
       });
     });
-  });
+  }
 </script>
 
