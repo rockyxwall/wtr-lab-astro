@@ -3,6 +3,10 @@
 
 @variant dark (&:is(.dark *));
 
+@variant data-horizontal (&[data-orientation="horizontal"]);
+@variant data-vertical (&[data-orientation="vertical"]);
+@variant data-active (&[data-active]);
+
 @theme {
   --color-background: #f2f3f4;
   --color-foreground: #1b1d23;

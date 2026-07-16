@@ -18,12 +18,12 @@ const VIEWPORTS = [
 const PAGES = [
   {
     name: 'novel',
-    refUrl: `file:///${ROOT.replace(/\\/g, '/')}/.temp/download/novel/single-page.html`,
+    refUrl: `file:///${ROOT.replace(/\\/g, '/')}/.temp/visual-baselines/novel/single-page.html`,
     astroUrl: 'http://localhost:4321/novel/steady-cultivation'
   },
   {
     name: 'homepage',
-    refUrl: `file:///${ROOT.replace(/\\/g, '/')}/.temp/download/homepage/single-page.html`,
+    refUrl: `file:///${ROOT.replace(/\\/g, '/')}/.temp/visual-baselines/homepage/single-page.html`,
     astroUrl: 'http://localhost:4321/'
   }
 ];
@@ -88,7 +88,7 @@ async function main() {
 
       // Ensure they have matching dimensions before pixelmatch comparison
       refImg = ensureSameSize(refImg, astroImg);
-      astroImg = ensureSameSize(refImg, astroImg); // refImg width/height was updated if needed
+      astroImg = ensureSameSize(astroImg, refImg); // refImg width/height was updated if needed
 
       const w = refImg.width;
       const h = refImg.height;
